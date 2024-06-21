@@ -1,5 +1,10 @@
-<h2>Dashboard</h2>
-<br>
+<div class="header-row">
+  <h2>Dashboard</h2>
+  <div class="add-expense-line">
+    <button mat-raised-button color="primary" class="add-expense-button" (click)="addExpense()"><mat-icon>add</mat-icon>Add Expense</button>
+  </div>
+</div>
+
 <div class="summary-cards">
   <!-- Summary Cards -->
   <mat-card class="summary-card">
@@ -32,11 +37,7 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <!-- Add more summary cards as needed -->
-</div>
-
-<div class="add-expense-line">
-  <button mat-raised-button color="primary" class="add-expense-button" (click)="addExpense()">Add Expense</button>
+  <!-- more summary cards as needed -->
 </div>
 
 
