@@ -4,3 +4,12 @@
 nav a {
   margin-left: 15px;
 }
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+.top-margin{
+  margin-top: 60px;
+}
