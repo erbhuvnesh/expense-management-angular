@@ -26,7 +26,7 @@
       "name": "Bus ticket",
       "date": "2024-06-19",
       "amount": 100,
-      "currency": "INR"
+      "currency": "GBP"
     },
     {
       "id": "8e98",
@@ -44,6 +44,24 @@
       "name": "Movie",
       "date": "2024-06-12",
       "amount": 400,
+      "currency": "INR"
+    },
+    {
+      "id": "227f",
+      "userId": 1,
+      "type": "Medical",
+      "name": "Eye Tests",
+      "date": "2024-06-19",
+      "amount": 20,
+      "currency": "EUR"
+    },
+    {
+      "id": "e3f8",
+      "userId": 1,
+      "type": "Shopping",
+      "name": "book",
+      "date": "2024-06-12",
+      "amount": 499,
       "currency": "INR"
     }
   ],

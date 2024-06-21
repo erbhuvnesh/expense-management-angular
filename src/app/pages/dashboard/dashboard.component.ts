@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
   userId: number = 1; // Assuming logged-in user ID is 1 for this example
   displayedColumns: string[] = ['type', 'name', 'date', 'amount', 'currency', 'actions'];
   dataSource: MatTableDataSource<Expense>;
+  expenseCategories: string[] = [];
+  topExpenditure: { category: string; amount: number; };
 
   constructor(private expenseService: ExpenseService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.expenses);
@@ -38,6 +40,11 @@ export class DashboardComponent implements OnInit {
       this.dataSource.data = this.expenses;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      this.topExpenditure = this.getTopExpenditureByCategory();
+    });
+
+    this.expenseService.getExpenseTypes().subscribe(expenses=>{
+      this.expenseCategories = expenses;
     });
   }
 
@@ -82,4 +89,35 @@ export class DashboardComponent implements OnInit {
   getTotalExpenditure(): number {
     return this.expenses.reduce((total, expense) => total + expense.amount, 0);
   }
+
+  getAverageExpenseByCategory(category: string): number {
+    const categoryExpenses = this.expenses.filter(expense => expense.type === category);
+    const total = categoryExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+    return categoryExpenses.length ? total / categoryExpenses.length : 0;
+  }
+
+  getTopExpenditureByCategory(): { category: string, amount: number } {
+    const categoryTotals: { [category: string]: number } = {};
+
+    this.expenses.forEach(expense => {
+      if (categoryTotals[expense.type]) {
+        categoryTotals[expense.type] += expense.amount;
+      } else {
+        categoryTotals[expense.type] = expense.amount;
+      }
+    });
+
+    let topCategory = '';
+    let highestAmount = 0;
+
+    for (const category in categoryTotals) {
+      if (categoryTotals[category] > highestAmount) {
+        highestAmount = categoryTotals[category];
+        topCategory = category;
+      }
+    }
+
+    return { category: topCategory, amount: highestAmount };
+  }
 }
+

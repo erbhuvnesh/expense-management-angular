@@ -1,10 +1,11 @@
+<h2>Dashboard</h2>
 <div class="summary-cards">
   <!-- Summary Cards -->
   <mat-card class="summary-card">
     <mat-card-header>
       <mat-card-title>Total Number of Expenses</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="card-content-center">
       <h1>{{ expenses.length }}</h1>
     </mat-card-content>
   </mat-card>
@@ -13,11 +14,23 @@
     <mat-card-header>
       <mat-card-title>Total Expenditure</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <h1>{{ getTotalExpenditure() }}</h1>
+    <mat-card-content class="card-content-center">
+      <h1>{{ getTotalExpenditure() | currency}}</h1>
     </mat-card-content>
   </mat-card>
 
+  <mat-card class="summary-card">
+    <mat-card-header>
+      <mat-card-title>Top Expenditure</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content-center">
+      <div *ngIf="topExpenditure">
+        <h1>{{ topExpenditure.amount | currency }}
+          <h3>({{ topExpenditure.category }})</h3>
+        </h1>
+      </div>
+    </mat-card-content>
+  </mat-card>
   <!-- Add more summary cards as needed -->
 </div>
 
