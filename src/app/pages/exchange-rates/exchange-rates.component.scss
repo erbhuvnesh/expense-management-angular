@@ -1,0 +1,28 @@
+.exchange-rates-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  table {
+    width: 100%;
+    max-width: 80vw;
+    mat-header-cell, mat-cell {
+      padding: 8px;
+    }
+  }
+
+  .paginator{
+    width: 100%;
+    max-width: 80vw;
+  }
+
+  .search-container{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    max-width: 80vw;
+  }
+  
+}
+
