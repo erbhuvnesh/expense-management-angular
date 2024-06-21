@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "johndoe",
+      "password": "password123",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "profilePicture": "https://example.com/profile.jpg"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1",
+      "userId": "1",
+      "type": "Food",
+      "name": "Lunch",
+      "date": "2024-06-20",
+      "amount": 150,
+      "currency": "INR"
+    },
+    {
+      "id": "2",
+      "userId": "1",
+      "type": "Transport",
+      "name": "Bus ticket",
+      "date": "2024-06-19",
+      "amount": 100,
+      "currency": "INR"
+    },
+    {
+      "id": "8e98",
+      "userId": "1",
+      "type": "Food",
+      "name": "Dinner",
+      "date": "2024-06-20",
+      "amount": 120,
+      "currency": "INR"
+    },
+    {
+      "id": "4ee1",
+      "userId": 1,
+      "type": "Entertainment",
+      "name": "Movie",
+      "date": "2024-06-12",
+      "amount": 400,
+      "currency": "INR"
+    }
+  ],
+  "currencies": [
+    "USD",
+    "EUR",
+    "GBP",
+    "INR"
+  ],
+  "expenseTypes": [
+    "Food",
+    "Transport",
+    "Medical",
+    "Entertainment",
+    "Shopping",
+    "Others"
+  ]
+}

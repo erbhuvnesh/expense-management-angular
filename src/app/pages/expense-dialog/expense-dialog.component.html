@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Expense</h1>
+<div mat-dialog-content class="full-width">
+  <mat-form-field >
+    <mat-label>Type</mat-label>
+    <mat-select [(value)]="data.expense.type">
+      <mat-option *ngFor="let type of expenseTypes" [value]="type">{{ type }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.expense.name">
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Date</mat-label>
+    <input matInput [(ngModel)]="data.expense.date" type="date">
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Amount</mat-label>
+    <input matInput [(ngModel)]="data.expense.amount" type="number">
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Currency</mat-label>
+    <mat-select [(value)]="data.expense.currency">
+      <mat-option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.expense">Save</button>
+</div>
