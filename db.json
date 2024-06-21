@@ -4,9 +4,9 @@
       "id": "1",
       "username": "johndoe",
       "password": "password123",
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "profilePicture": "https://example.com/profile.jpg"
+      "name": "Bhuvnesh Gupta",
+      "email": "sample-mail@example.com",
+      "profilePicture": "profile1.jpg"
     }
   ],
   "expenses": [
