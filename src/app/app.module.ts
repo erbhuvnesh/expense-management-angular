@@ -12,6 +12,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +25,7 @@ import { ExchangeRatesComponent } from './pages/exchange-rates/exchange-rates.co
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { ExpenseDialogComponent } from './pages/expense-dialog/expense-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +52,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

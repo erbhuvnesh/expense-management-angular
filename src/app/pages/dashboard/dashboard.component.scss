@@ -1,0 +1,43 @@
+.summary-cards {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  width: calc(25% - 20px);
+  margin: 0 10px;
+  text-align: center;
+}
+
+.table-heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.table-container {
+  width: 64%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.expense-table {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    width: 80%;
+  }
+}
+
+.add-expense-line {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 32px;
+}
+
+.add-expense-button{
+  margin: auto 24px;
+}

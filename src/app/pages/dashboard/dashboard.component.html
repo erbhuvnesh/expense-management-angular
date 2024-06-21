@@ -1,39 +1,72 @@
-<h2>Dashboard</h2>
-<button mat-raised-button color="primary" (click)="addExpense()">Add Expense</button>
-<table mat-table [dataSource]="expenses" class="mat-elevation-z8">
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef> Type </th>
-    <td mat-cell *matCellDef="let expense"> {{expense.type}} </td>
-  </ng-container>
+<div class="summary-cards">
+  <!-- Summary Cards -->
+  <mat-card class="summary-card">
+    <mat-card-header>
+      <mat-card-title>Total Number of Expenses</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ expenses.length }}</h1>
+    </mat-card-content>
+  </mat-card>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let expense"> {{expense.name}} </td>
-  </ng-container>
+  <mat-card class="summary-card">
+    <mat-card-header>
+      <mat-card-title>Total Expenditure</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ getTotalExpenditure() }}</h1>
+    </mat-card-content>
+  </mat-card>
 
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let expense"> {{expense.date}} </td>
-  </ng-container>
+  <!-- Add more summary cards as needed -->
+</div>
 
-  <ng-container matColumnDef="amount">
-    <th mat-header-cell *matHeaderCellDef> Amount </th>
-    <td mat-cell *matCellDef="let expense"> {{expense.amount}} </td>
-  </ng-container>
+<div class="add-expense-line">
+  <button mat-raised-button color="primary" class="add-expense-button" (click)="addExpense()">Add Expense</button>
+</div>
 
-  <ng-container matColumnDef="currency">
-    <th mat-header-cell *matHeaderCellDef> Currency </th>
-    <td mat-cell *matCellDef="let expense"> {{expense.currency}} </td>
-  </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let expense">
-      <button mat-button (click)="editExpense(expense)">Edit</button>
-      <button mat-button color="warn" (click)="deleteExpense(expense.id)">Delete</button>
-    </td>
-  </ng-container>
+<!-- Table Section -->
+<h2 class="table-heading">All Expenses</h2>
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" matSort class="expense-table">
+    <!-- Columns -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.type }}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.date | date }}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.amount | currency: expense.currency }}</td>
+    </ng-container>
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Currency</th>
+      <td mat-cell *matCellDef="let expense">{{ expense.currency }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let expense">
+        <button mat-icon-button (click)="editExpense(expense)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteExpense(expense.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Pagination -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
