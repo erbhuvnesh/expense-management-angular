@@ -39,16 +39,19 @@ Ensure you have the following installed:
 
     ```bash
     git clone https://github.com/erbhuvnesh/expense-management-angular.git
+    ```
 
 2. Navigate to the project directory:
 
     ```bash
     cd expense-management-angular
+    ```
 
 3. Install dependencies
 
     ```bash
     npm install
+    ```
 
 ### Running the project
 
@@ -56,10 +59,13 @@ Ensure you have the following installed:
 
     ```bash
     json-server --watch db.json --port 3000
+    ```
+    [!NOTE]  
+    Port 3000 should be available to start mock server. If its occupied, please stop the process running on Port 3000.
 
 2. Start the Angular Project
 
     ```bash
     ng serve
-
+    ```
 3. Open your browser and navigate to http://localhost:4200/ to view the application.
