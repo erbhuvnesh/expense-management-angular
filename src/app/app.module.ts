@@ -17,6 +17,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './layout/header/header.component';
@@ -27,6 +31,8 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { ExpenseDialogComponent } from './pages/expense-dialog/expense-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { exchangeRatesReducer } from './store/reducers/exchange-rates.reducer';
+import { ExchangeRatesEffects } from './store/effects/exchange-rates.effects';
 
 @NgModule({
   declarations: [
@@ -58,7 +64,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatPaginatorModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    StoreModule.forRoot({ exchangeRates: exchangeRatesReducer }),
+    EffectsModule.forRoot([ExchangeRatesEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

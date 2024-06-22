@@ -1,12 +1,15 @@
-// src/app/pages/dashboard/dashboard.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExpenseService } from '../../services/expense.service';
 import { Expense } from '../../models/expense.model';
+import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { ExpenseDialogComponent } from '../expense-dialog/expense-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as fromExchangeRates from '../../store/reducers/exchange-rates.reducer';
+import * as ExchangeRatesSelectors from '../../store/selectors/exchange-rates.selectors';
+import { Observable, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,15 +26,25 @@ export class DashboardComponent implements OnInit {
   dataSource: MatTableDataSource<Expense>;
   expenseCategories: string[] = [];
   topExpenditure: { category: string; amount: number; };
+  exchangeRates$: Observable<any>;
+  preferredCurrency$: Observable<string>;
+  exchangeRates: any;
+  preferredCurrency: string;
 
-  constructor(private expenseService: ExpenseService, public dialog: MatDialog) {
+  constructor(private expenseService: ExpenseService, public dialog: MatDialog, private store: Store<fromExchangeRates.ExchangeRatesState>) {
     this.dataSource = new MatTableDataSource(this.expenses);
+    this.exchangeRates$ = this.store.select(ExchangeRatesSelectors.selectExchangeRates);
+    this.preferredCurrency$ = this.store.select(ExchangeRatesSelectors.selectPreferredCurrency);
    }
 
   ngOnInit(): void {
     this.loadExpenses();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    combineLatest([this.exchangeRates$, this.preferredCurrency$]).subscribe(([rates, currency]) => {
+      this.exchangeRates = rates;
+      this.preferredCurrency = currency;
+    });
   }
 
   loadExpenses(): void {
@@ -86,13 +99,28 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  convertToPreferredCurrency(amount: number, currency: string): number {
+    if (!this.exchangeRates || !this.preferredCurrency) {
+      return amount;
+    }
+    const rate = this.exchangeRates[currency];
+    const preferredRate = this.exchangeRates[this.preferredCurrency];
+    return (amount / rate) * preferredRate;
+  }
+
   getTotalExpenditure(): number {
-    return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+    return this.expenses.reduce((total, expense) => {
+      const convertedAmount = this.convertToPreferredCurrency(expense.amount, expense.currency);
+      return total + convertedAmount;
+    }, 0);
   }
 
   getAverageExpenseByCategory(category: string): number {
     const categoryExpenses = this.expenses.filter(expense => expense.type === category);
-    const total = categoryExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+    const total = categoryExpenses.reduce((sum, expense) => {
+      const convertedAmount = this.convertToPreferredCurrency(expense.amount, expense.currency);
+      return sum + convertedAmount;
+    }, 0);
     return categoryExpenses.length ? total / categoryExpenses.length : 0;
   }
 
@@ -100,10 +128,11 @@ export class DashboardComponent implements OnInit {
     const categoryTotals: { [category: string]: number } = {};
 
     this.expenses.forEach(expense => {
+      const convertedAmount = this.convertToPreferredCurrency(expense.amount, expense.currency);
       if (categoryTotals[expense.type]) {
-        categoryTotals[expense.type] += expense.amount;
+        categoryTotals[expense.type] += convertedAmount;
       } else {
-        categoryTotals[expense.type] = expense.amount;
+        categoryTotals[expense.type] = convertedAmount;
       }
     });
 
@@ -119,5 +148,6 @@ export class DashboardComponent implements OnInit {
 
     return { category: topCategory, amount: highestAmount };
   }
+
 }
 

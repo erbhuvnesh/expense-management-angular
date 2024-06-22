@@ -21,7 +21,7 @@
       <mat-card-title>Total Expenditure</mat-card-title>
     </mat-card-header>
     <mat-card-content class="card-content-center">
-      <h1>{{ getTotalExpenditure() | currency}}</h1>
+      <h1>{{ getTotalExpenditure() | currency: preferredCurrency}}</h1>
     </mat-card-content>
   </mat-card>
 
@@ -31,7 +31,7 @@
     </mat-card-header>
     <mat-card-content class="card-content-center">
       <div *ngIf="topExpenditure">
-        <h1>{{ topExpenditure.amount | currency }}
+        <h1>{{ topExpenditure.amount | currency: preferredCurrency }}
           <h3>({{ topExpenditure.category }})</h3>
         </h1>
       </div>

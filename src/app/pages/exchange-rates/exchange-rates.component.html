@@ -1,6 +1,24 @@
 <h2>Current Exchange Rates</h2>
 <div class="exchange-rates-container">
   <div class="search-container">
+    <div style="display: inline-flex;">
+      <h3>
+        Preferred Currency: 
+        <span *ngIf="!editMode">{{ preferredCurrency$ | async }}</span>
+        <span *ngIf="!editMode">
+          <button mat-icon-button (click)="toggleEditMode()" class="edit-icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </span>
+        <mat-form-field *ngIf="editMode">
+          <mat-select (selectionChange)="setPreferredCurrency($event.value)" [(value)]="preferredCurrency">
+            <mat-option *ngFor="let rate of dataSource.data" [value]="rate.currency">
+              {{ rate.currency }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </h3>
+    </div>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Search</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Filter by currency">
@@ -23,4 +41,5 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons class="mat-elevation-z4 paginator"></mat-paginator>
+
 </div>
