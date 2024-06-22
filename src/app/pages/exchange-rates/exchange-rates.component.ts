@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,7 +13,7 @@ import * as ExchangeRatesActions from '../../store/actions/exchange-rates.action
   templateUrl: './exchange-rates.component.html',
   styleUrls: ['./exchange-rates.component.scss']
 })
-export class ExchangeRatesComponent implements OnInit {
+export class ExchangeRatesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['currency', 'rate'];
   dataSource = new MatTableDataSource<any>();
   preferredCurrency$: Observable<string>;
@@ -29,7 +29,6 @@ export class ExchangeRatesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.store.dispatch(ExchangeRatesActions.loadExchangeRates());
     this.exchangeRates$.subscribe(rates => {
       this.dataSource.data = Object.entries(rates).map(([key, value]) => ({ currency: key, rate: value }));
       this.dataSource.paginator = this.paginator;
@@ -37,6 +36,12 @@ export class ExchangeRatesComponent implements OnInit {
 
     this.preferredCurrency$.subscribe(currency => {
       this.preferredCurrency = currency;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.exchangeRates$.subscribe(rates => {
+      this.dataSource.paginator = this.paginator;
     });
   }
 
