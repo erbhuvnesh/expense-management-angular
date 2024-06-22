@@ -1,27 +1,61 @@
-# ExpenseManagement
+# Expense Management Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+This Angular application provides functionalities for managing expenses, viewing exchange rates, and editing user profile information.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Dashboard
 
-## Code scaffolding
+- **List of Expenses**: Displays a table listing all expenses.
+- **Summary of Expenses**: Provides summary cards showing total number of expenses, total expenditure, and top expenditure category.
+- **Add, Edit, Delete Expenses**: Allows users to add new expenses, edit existing ones, and delete expenses.
+- **Preferred Currency**: All expense data is displayed in the preferred currency format set by the user.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Exchange Rates
 
-## Build
+- **Current Exchange Rates**: Fetches and displays current exchange rates for various currencies using the Open Exchange Rates API.
+- **Set Preferred Currency**: Users can select their preferred currency, which is used globally throughout the application.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### User Profile
 
-## Running unit tests
+- **User Information**: Displays user's name, email, and profile picture.
+- **Edit User Information**: Provides an option to edit user information, including uploading a new profile picture.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Getting Started
 
-## Running end-to-end tests
+To get the project up and running on your local machine, follow these steps:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Prerequisites
 
-## Further help
+Ensure you have the following installed:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Node.js
+- Angular CLI
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/erbhuvnesh/expense-management-angular.git
+
+2. Navigate to the project directory:
+
+    cd expense-management-angular
+
+3. Install dependencies
+
+    npm install
+
+### Running the project
+
+1. Start the mock server
+
+    json-server --watch db.json --port 3000
+
+2. Start the Angular Project
+
+    ng serve
+
+3. Open your browser and navigate to http://localhost:4200/ to view the application.
