@@ -60,8 +60,8 @@ Ensure you have the following installed:
     ```bash
     json-server --watch db.json --port 3000
     ```
-    [!NOTE]  
-    Port 3000 should be available to start mock server. If its occupied, please stop the process running on Port 3000.
+> [!NOTE]  
+> Port 3000 should be available to start mock server. If its occupied, please stop the process running on Port 3000.
 
 2. Start the Angular Project
 
