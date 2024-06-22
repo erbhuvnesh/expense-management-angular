@@ -72,20 +72,33 @@
       "date": "2024-06-21",
       "amount": 5000,
       "currency": "INR"
+    },
+    {
+      "id": "b215",
+      "userId": 1,
+      "type": "Medical",
+      "name": "Medicines",
+      "date": "2024-06-22",
+      "amount": 1580,
+      "currency": "INR"
     }
   ],
-  "currencies": [
-    "USD",
-    "EUR",
-    "GBP",
-    "INR"
-  ],
-  "expenseTypes": [
-    "Food",
-    "Transport",
-    "Medical",
-    "Entertainment",
-    "Shopping",
-    "Others"
-  ]
+  "currencies": {
+    "list": [
+      "USD",
+      "EUR",
+      "GBP",
+      "INR"
+    ]
+  },
+  "expenseTypes": {
+    "list": [
+      "Food",
+      "Transport",
+      "Medical",
+      "Entertainment",
+      "Shopping",
+      "Others"
+    ]
+  }
 }

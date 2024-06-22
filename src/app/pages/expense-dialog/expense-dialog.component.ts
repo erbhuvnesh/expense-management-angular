@@ -36,6 +36,10 @@ export class ExpenseDialogComponent implements OnInit {
     });
   }
 
+  onSaveExpense(): void {
+    this.dialogRef.close(this.data.expense);
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

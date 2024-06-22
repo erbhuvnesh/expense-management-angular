@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Expense } from '../models/expense.model';
 
 @Injectable({
@@ -28,10 +28,14 @@ export class ExpenseService {
   }
 
   getExpenseTypes(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/expenseTypes`);
+    return this.http.get<{ list: string[] }>(`${this.baseUrl}/expenseTypes`).pipe(
+      map(response => response.list)
+    );
   }
 
   getCurrencies(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/currencies`);
+    return this.http.get<{ list: string[] }>(`${this.baseUrl}/currencies`).pipe(
+      map(response => response.list)
+    );
   }
 }
